@@ -4,12 +4,12 @@
 
 void Enemy::step() {
 
-    this->position.x+=0.01f;
+    this->position.x+=speed;
 
     float random = ((int) rand())%100;
     if (random==0){
 
-        Bullet* bullet = new Bullet("bullet.trg");
+        Bullet* bullet = new Bullet("bullet.trg",SPACESHIP_OBJ);
         bullet->direction=-1.0f;
         bullet->position.x= this->position.x;
         bullet->position.y= this->position.y-0.12;
@@ -17,8 +17,11 @@ void Enemy::step() {
         System::scene->addObject(bullet);
     }
 
-    if (this->position.x>1.0f){
+    if (this->position.x>1.3f){
 
-        this->position.x=-1.0f;
+        this->position.x=-1.3f;
+    }else if(this->position.x<-1.3f){
+
+        this->position.x=1.3f;
     }
 }

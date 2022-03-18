@@ -8,7 +8,16 @@ void Bullet::step() {
 
     //test colisiones
 
-    std::vector<Object*> *objects = System::scene->getCollisions(ENEMY_OBJ, this);
+    std::vector<Object*> *objects;
+
+
+    if (owner==ENEMY_OBJ){
+        objects = System::scene->getCollisions(ENEMY_OBJ, this);
+
+    } else if(owner==SPACESHIP_OBJ){
+        objects = System::scene->getCollisions(SPACESHIP_OBJ, this);
+
+    }
 
     if (objects->size()>0){
         System::scene->deleteObject(this);

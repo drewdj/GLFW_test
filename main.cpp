@@ -40,9 +40,19 @@ int main(int argc, char** argv)
     triangle->scale=glm::vec3(0.1,0.1,0.1);
     triangle->position.y=-0.35;
 
-    Object* enemy = new Enemy("triangle.trg");
+    Object* enemy = new Enemy("triangle.trg",0.01);
     enemy->scale=glm::vec3(0.1,0.1,0.1);
-    enemy->position.y=0.35;
+    enemy->position.y=0.55;
+
+    Object* enemy1 = new Enemy("triangle.trg",0.01);
+    enemy1->scale=glm::vec3(0.1,0.1,0.1);
+    enemy1->position.y=0.55;
+    enemy1->position.x=0.4;
+
+    Object* enemigo = new Enemy("triangle.trg",0.015);
+    enemigo->scale=glm::vec3(0.1,0.1,0.1);
+    enemigo->position.y=0.45;
+
 
     Render* render = new Render();
     Scene* scene = new Scene();
@@ -50,6 +60,8 @@ int main(int argc, char** argv)
     scene->setCamera(new Camera(glm::vec3(0,0,0.25f),glm::vec3(0,0,0),perspective));
     scene->addObject(triangle);
     scene->addObject(enemy);
+    scene->addObject(enemy1);
+    scene->addObject(enemigo);
 
     while(!glfwWindowShouldClose(window))
 

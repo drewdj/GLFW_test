@@ -19,7 +19,7 @@ void SpaceShip::step() {
 
     if (InputManager::keys[' ']==1){
         if (canShoot){
-            Object* bullet = new Bullet("bullet.trg");
+            Object* bullet = new Bullet("bullet.trg",ENEMY_OBJ);
             bullet->position.x= this->position.x;
             bullet->position.y= this->position.y;
             bullet->scale =glm::vec3(0.1f,0.1f,0.1f);
@@ -28,6 +28,14 @@ void SpaceShip::step() {
         }
     } else {
         canShoot = true;
+    }
+
+    if (this->position.x>1.3f){
+
+        this->position.x=-1.3f;
+    }else if(this->position.x<-1.3f){
+
+        this->position.x=1.3f;
     }
 
 }
