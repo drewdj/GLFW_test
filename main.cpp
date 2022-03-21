@@ -43,15 +43,20 @@ int main(int argc, char** argv)
     Object* enemy = new Enemy("triangle.trg",0.01);
     enemy->scale=glm::vec3(0.1,0.1,0.1);
     enemy->position.y=0.55;
+    enemy->rotation.z=glm::radians(180.0f);
 
     Object* enemy1 = new Enemy("triangle.trg",0.01);
     enemy1->scale=glm::vec3(0.1,0.1,0.1);
     enemy1->position.y=0.55;
     enemy1->position.x=0.4;
+    enemy1->rotation.z=glm::radians(180.0f);
+
 
     Object* enemigo = new Enemy("triangle.trg",0.015);
     enemigo->scale=glm::vec3(0.1,0.1,0.1);
     enemigo->position.y=0.45;
+    enemigo->rotation.z=glm::radians(180.0f);
+
 
 
     Render* render = new Render();

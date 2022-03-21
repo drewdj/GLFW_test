@@ -30,9 +30,10 @@ bool Box2D::collision(BV* _b2){
 }
 
 
-void Box2D::init(Object* obj){
+void Box2D::init(Object* obj, int triangleIdx){
 
     this->obj=obj;
+    this->triangleIdx=triangleIdx;
 
     update();
 
@@ -45,44 +46,35 @@ void Box2D::update(){
 
 
     std::vector<vertex_t>* vertexList=obj->mesh->vertexList;
-
+    std::vector<int>* faceList=obj->mesh->faceList;
     obj->computeMatrix();
 
     glm::mat4 m=obj->getMatrix();
-
     int numVertex=vertexList->size();
-
     glm::vec4 newPos;
 
 
-    vertex_t v=vertexList->data()[0];
-
+    vertex_t v=vertexList->data()[faceList->data()[triangleIdx*3]];
     newPos=m*v.posicion;
 
 
     xMin=xMax=newPos.x;
-
     yMin=yMax=newPos.y;
 
 
-    for(int idV=1; idV<numVertex; idV++)
+    for(int idV=triangleIdx*3+1; idV<triangleIdx*3+3; idV++)
 
     {
 
-        vertex_t v=vertexList->data()[idV];
-
+        vertex_t v=vertexList->data()[faceList->data()[idV]];
         newPos=m*v.posicion;
 
 
 
         if(xMin>newPos.x)xMin=newPos.x;
-
         else if(xMax<newPos.x)xMax=newPos.x;
 
-
-
         if(yMin>newPos.y)yMin=newPos.y;
-
         else if(yMax<newPos.y)yMax=newPos.y;
 
     }
@@ -99,11 +91,14 @@ Collider::Collider(Object* obj)
 
     boxList=new std::vector<BV*>();
 
-    BV* newBox=new Box2D();
+    int numTriangles = obj->mesh->faceList->size()/3;
 
-    newBox->init(obj);
+    for (int i = 0; i < numTriangles; ++i) {
+        BV* newBox=new Box2D();
+        newBox->init(obj, i);
+        boxList->push_back(newBox);
+    }
 
-    boxList->push_back(newBox);
 
 
 

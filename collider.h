@@ -6,7 +6,7 @@ class Object;
 class BV {
 public:
     virtual bool collision(BV* b2) = 0;
-    virtual void init(Object* obj) = 0;
+    virtual void init(Object* obj,int triangleIdx) = 0;
     virtual void update() = 0;
 };
 
@@ -18,9 +18,10 @@ public:
     float yMin = 0;
     float xMin = 0;
     Object* obj = nullptr;
+    int triangleIdx;
     Box2D();
     bool collision(BV* b2);
-    void init(Object* obj);
+    void init(Object* obj, int triangleIdx);
     void update();
 };
 
