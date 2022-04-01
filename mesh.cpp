@@ -68,7 +68,13 @@ void Mesh::loadFromFile (std::string fileName){
         faceList->push_back(v3);
     }
 
+    std::string vshader;
+    fin>>vshader;
+    std::string fshader;
+    fin>>fshader;
     fin.close();
+
+    this->shader = new GLShader(vshader, fshader);
 
 }
 

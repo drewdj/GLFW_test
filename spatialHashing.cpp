@@ -30,8 +30,8 @@ void SpatialHashing::update() {
         int key=obj->first;
         Object* object=obj->second;
 
-        int coordX=(minX+object->position.x)/(tamX/numColumnas);
-        int coordY=(minY+object->position.y)/(tamY/numFilas);
+        int coordX=(object->position.x-minX)/(tamX/numColumnas);
+        int coordY=(object->position.y-minY)/(tamY/numFilas);
 
         if((coordX>=0&&coordX<numColumnas)&&(coordY>=0&&coordY<numFilas)){
             grid[coordY][coordX][key]=object;

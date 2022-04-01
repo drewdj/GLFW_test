@@ -3,6 +3,7 @@
 #include "common.h"
 #include "mesh.h"
 #include "collider.h"
+#include "shader.h"
 
 class Object {
     static int idCounter;
@@ -16,6 +17,7 @@ public:
     glm::vec3 scale=glm::vec3(1.0f,1.0f,1.0f);
 
     Mesh* mesh;
+    GLShader* shader;
     Collider* collider;
 
     Object();

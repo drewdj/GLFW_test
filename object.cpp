@@ -22,6 +22,7 @@ Object::Object(std::string fileName) {
     this->id = idCounter;
     idCounter++;
     this->mesh = new Mesh(fileName);
+    this->shader=mesh->shader;
     this->position = glm::vec3(0.0f, 0.0f, 0.0f);
     this->modelMatrix = glm::mat4(1.0f);
 

@@ -68,6 +68,10 @@ int main(int argc, char** argv)
     scene->addObject(enemy1);
     scene->addObject(enemigo);
 
+    render->setupObject(enemy);
+    render->setupObject(enemy);
+
+
     while(!glfwWindowShouldClose(window))
 
     {
