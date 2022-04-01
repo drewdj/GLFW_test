@@ -22,9 +22,9 @@ void Render::setupObject(Object* obj){
     glBufferData(GL_ARRAY_BUFFER,sizeof(vertex_t)*obj->mesh->vertexList->size(),
                  obj->mesh->vertexList->data(),GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,bo.vbo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(vertex_t)*obj->mesh->vertexList->size(),
-                 obj->mesh->vertexList->data(),GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,bo.ibo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(int)*obj->mesh->faceList->size(),
+                 obj->mesh->faceList->data(),GL_STATIC_DRAW);
 
     boList[obj->id]=bo;
 }
@@ -73,7 +73,7 @@ void Render::drawObjectGL4(Object *obj) {
     glVertexAttribPointer(vpos,4,GL_FLOAT,GL_FALSE,sizeof(vertex_t),(void*) offsetof(vertex_t,color));
 
     unsigned int vnorm =2;
-    glEnableVertexAttribArray(vpos);
+    glEnableVertexAttribArray(vnorm);
     glVertexAttribPointer(vpos,4,GL_FLOAT,GL_FALSE,sizeof(vertex_t),(void*)offsetof(vertex_t,normal));
 
 
@@ -102,6 +102,6 @@ void Render::drawScene(Scene* scene) {
 
     for(auto it = objList->begin();
         it!=objList->end(); it++){
-        drawObject(it->second);
+        drawObjectGL4(it->second);
     }
 }
