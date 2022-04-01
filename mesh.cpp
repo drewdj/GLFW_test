@@ -52,6 +52,12 @@ void Mesh::loadFromFile (std::string fileName){
         fin>>v1.color.g;
         fin>>v1.color.b;
         fin>>v1.color.a;
+
+
+        fin>>v1.normal.x;
+        fin>>v1.normal.y;
+        fin>>v1.normal.z;
+        fin>>v1.normal.w;
         vertexList->push_back(v1);
     }
     int numFaces=0;

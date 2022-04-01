@@ -5,7 +5,7 @@
 #include "render.h"
 
 Render::Render(){
-
+    glEnable(GL_DEPTH_TEST);
 }
 
 
@@ -66,13 +66,22 @@ void Render::drawObjectGL4(Object *obj) {
     glUseProgram(obj->shader->programID);
     unsigned int vpos =0;
     glEnableVertexAttribArray(vpos);
-    glVertexAttribPointer(vpos,4,GL_FLOAT,GL_FALSE,sizeof(vertex_t),(void*)0);
+    glVertexAttribPointer(vpos,4,GL_FLOAT,GL_FALSE,sizeof(vertex_t),(void*) offsetof(vertex_t,posicion));
 
     unsigned int vcolor =1;
     glEnableVertexAttribArray(vcolor);
-    glVertexAttribPointer(vpos,4,GL_FLOAT,GL_FALSE,sizeof(vertex_t),(void*)(sizeof(glm::vec4)));
+    glVertexAttribPointer(vpos,4,GL_FLOAT,GL_FALSE,sizeof(vertex_t),(void*) offsetof(vertex_t,color));
 
-    glUniformMatrix4fv(0,1,GL_FALSE,obj->getMatrix()[0][0]);
+    unsigned int vnorm =2;
+    glEnableVertexAttribArray(vpos);
+    glVertexAttribPointer(vpos,4,GL_FLOAT,GL_FALSE,sizeof(vertex_t),(void*)offsetof(vertex_t,normal));
+
+
+    glm::vec4 lightPos(0.0f,0.0f,3.0f,1.0f);
+
+    glUniformMatrix4fv(0,1,GL_FALSE,&(proj*view*obj->getMatrix())[0][0]);
+    glUniformMatrix4fv(1,1,GL_FALSE,&(obj->getMatrix())[0][0]);
+    glUniform4fv(2,1,&lightPos[0]);
 
     glDrawElements(GL_TRIANGLES, obj->mesh->faceList->size(),GL_UNSIGNED_INT, nullptr);
 }
