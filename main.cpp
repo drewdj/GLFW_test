@@ -16,13 +16,13 @@
 
 
 
-bool renderfps(double framerate) 
-{ 
-	static double currentTime = 0; 
+bool renderfps(double framerate)
+{
+	static double currentTime = 0;
 	static double lastTime=0;
-	
+
 	currentTime = glfwGetTime();
-	if(currentTime - lastTime >= 1.0 / framerate) 
+	if(currentTime - lastTime >= 1.0 / framerate)
 	{
 		lastTime = currentTime;
 		return true;
@@ -42,9 +42,9 @@ int main(int argc, char** argv)
 	glfwMakeContextCurrent(window);
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-	
+
 	int glewState=glewInit();
-	
+
 	if (glewState!=GLEW_OK)
 		std::cout << "ERROR iniciando glew\n";
 
@@ -52,18 +52,19 @@ int main(int argc, char** argv)
 
     Object* background = new Background("background.trg");
     background->position.z = -5.0f;
-//    background->scale=glm::vec3(15.0f,15.0f,15.0f);
+    background->scale=glm::vec3(11.0f,11.0f,11.0f);
+
+    Object* enemy = new Enemy("triangle.trg");
+    enemy->scale=glm::vec3(0.3f,0.3f,0.3f);
+    enemy->rotation.z=glm::radians(180.0f);
+    enemy->position.y=0.8f;
 
 	Object* player=new SpaceShip("triangle.trg");
 	player->scale=glm::vec3(0.3f,0.3f,0.3f);
 	player->position.y=-0.8f;
 
 
-    Object* enemy = new Enemy("triangle.trg");
-    enemy->scale=glm::vec3(0.3f,0.3f,0.3f);
-    enemy->rotation.z=glm::radians(180.0f);
-//    enemy->rotation.x=glm::radians(180.0f);
-    enemy->position.y=0.8f;
+
 
 
 	Render* render=new Render();
@@ -92,8 +93,8 @@ int main(int argc, char** argv)
 	scene->addObject(cube);*/
 
 	while(!glfwWindowShouldClose(window))
-	{	
-	
+	{
+
 		if(renderfps(60.0f)){
 			scene->step(0.0);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -102,7 +103,7 @@ int main(int argc, char** argv)
 			glfwPollEvents();
 		}
 	}
-	
+
 //	delete triangle;
 	return 0;
 

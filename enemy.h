@@ -6,9 +6,9 @@ class Enemy: public Object{
 	
 public:
 
-    float movement = 0.01f;
+    bool movingRight = true;
 	Enemy():Object(){};
-	Enemy(std::string fileName):Object(fileName){typeObject=ENEMY_OBJ;movement=0.01f;};
+	Enemy(std::string fileName):Object(fileName){typeObject=ENEMY_OBJ;};
 	virtual void step() override;
 };
 
