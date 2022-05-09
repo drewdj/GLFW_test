@@ -8,6 +8,7 @@
 #include "inputManager.h"
 #include "spaceShip.h"
 #include "system.h"
+#include "background.h"
 
 #include "enemy.h"
 #include "cube.h"
@@ -49,6 +50,10 @@ int main(int argc, char** argv)
 
 	InputManager::init(window);
 
+    Object* background = new Background("background.trg");
+    background->position.z = -5.0f;
+//    background->scale=glm::vec3(15.0f,15.0f,15.0f);
+
 	Object* player=new SpaceShip("triangle.trg");
 	player->scale=glm::vec3(0.3f,0.3f,0.3f);
 	player->position.y=-0.8f;
@@ -59,16 +64,24 @@ int main(int argc, char** argv)
     enemy->rotation.z=glm::radians(180.0f);
 //    enemy->rotation.x=glm::radians(180.0f);
     enemy->position.y=0.8f;
+
+
 	Render* render=new Render();
 	Scene* scene=new Scene();
+
 	System::scene=scene;
 	scene->setCamera(new Camera(glm::vec3(0,0,1.0f),glm::vec3(0,0,0),perspective));
+
+    scene->addObject(background);
+    render->setupObject(background);
 
     scene->addObject(enemy);
     render->setupObject(enemy);
 
 	scene->addObject(player);
 	render->setupObject(player);
+
+
 
 //CUBO
 /*	Object* cube=new Cube("cube.trg");

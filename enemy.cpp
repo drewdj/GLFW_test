@@ -4,9 +4,9 @@
 
 
 void Enemy::step()
-{
-    this->position.x+=0.01f;
-	
+{;
+    this->position.x+=this->movement;
+
 	int random=((int)rand())%100;
 	if(random==0)
 	{
@@ -19,7 +19,8 @@ void Enemy::step()
 	}
 	if(this->position.x>1.0f)
 	{
-		this->position.x=-1.0f;
+        this->movement=-0.01f;
+//		this->position.x=-1.0f;
 	}
 
 }
