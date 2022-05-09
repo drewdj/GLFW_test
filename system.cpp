@@ -1,3 +1,4 @@
 #include "system.h"
 
-Scene* System::scene = nullptr;
+
+ Scene* System::scene=nullptr;

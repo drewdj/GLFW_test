@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include "common.h"
@@ -8,8 +9,9 @@
 #include "inputManager.h"
 
 
-class System {
+class System
+{
 public:
-    static Scene* scene;
+	static Scene* scene;
 };
 

@@ -1,27 +1,65 @@
 #version 430
 
+
 layout(location=2) uniform vec4 lightPos;
 
+layout(location=3) uniform vec4 eyePos;
+
+layout(location=4) uniform sampler2D texture;
+
+
+
+
+
 in vec4 fcolor;
+
 in vec4 fpos;
+
 in vec4 fnorm;
 
-out vec4 gl_FragColor;
+in vec2 ftext;
+
+
+out vec4 gli_FragColor;
+
 
 void main() {
 
-    float amb=0.5f;
-    float diffuse=0.0f;
 
-    vec4 L = normalize(lightPos - fpos);
-    float I=1.0f;
-    float K=1.0f;
 
-    diffuse=I*K*max(dot(L,fnorm),0.0f);
-
-    float specular=0.0f; //TODO calcular specular
+	vec4 finalColor=fcolor;
 
 
 
-    gl_FragColor = fcolor*(amb+diffuse+specular);
+	float amb=0.2f;
+
+	float diffuse=0.0f;
+
+
+
+	vec4 textColor=texture2D(texture,ftext);
+
+	finalColor+=textColor;
+
+
+
+	vec4 lightDir=normalize(lightPos-fpos);
+
+	vec4 reflectDir=2*fnorm*(dot(lightDir,fnorm))-lightDir;
+
+	vec4 eyeDir =normalize(eyePos-fpos);
+
+
+
+	diffuse=max(dot(fnorm,lightDir),0.0f);//color luz
+
+
+	float specular=pow(max(dot(eyeDir,reflectDir),0.0f),256);
+
+
+  //gli_FragColor = (finalColor)*(amb+diffuse+specular);
+  gli_FragColor = textColor;
+
+
+
 }

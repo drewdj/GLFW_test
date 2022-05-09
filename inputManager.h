@@ -2,11 +2,9 @@
 
 #include "common.h"
 #include <cstring>
+class InputManager{
 
-class InputManager {
-
-public:
-    static char keys[512];
-    static void init(GLFWwindow* window);
-
+	public :
+		static char keys[512];
+		static void init(GLFWwindow* window);
 };

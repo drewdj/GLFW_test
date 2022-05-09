@@ -6,38 +6,37 @@
 
 bool canShoot = true;
 
-void SpaceShip::step() {
-    if (InputManager::keys['A']){
-        position.x-=0.01f;
+void SpaceShip::step()
+{
 
-    }
 
-    if (InputManager::keys['D']){
-        position.x+=0.01f;
+	if(InputManager::keys['A'])
+	{
+                position.x-=0.01f;
+	}	
 
-    }
-
-    if (InputManager::keys[' ']==1){
+	if(InputManager::keys['D'])
+	{
+                position.x+=0.01f;
+	}
+	
+	if(InputManager::keys[' '])
+	{
         if (canShoot){
-            Object* bullet = new Bullet("bullet.trg",ENEMY_OBJ);
-            bullet->position.x= this->position.x;
-            bullet->position.y= this->position.y;
-            bullet->scale =glm::vec3(0.1f,0.1f,0.1f);
+            Object* bullet=new Bullet("bullet.trg");
+            bullet->position.x=this->position.x;
+            bullet->position.y=this->position.y+0.15f;
+            bullet->rotation.z=glm::radians(180.0f);
+
+            bullet->scale=glm::vec3(0.1f,0.1f,0.1);
             System::scene->addObject(bullet);
-            canShoot = false;
+            canShoot= false;
         }
-    } else {
+
+	} else {
         canShoot = true;
     }
 
-    if (this->position.x>1.3f){
-
-        this->position.x=-1.3f;
-    }else if(this->position.x<-1.3f){
-
-        this->position.x=1.3f;
-    }
-
+	
 }
-
 
