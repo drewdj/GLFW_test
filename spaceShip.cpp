@@ -9,6 +9,12 @@ bool canShoot = true;
 void SpaceShip::step()
 {
 
+    if(this->position.x>0.46f)
+    {
+        position.x=0.46f;
+    } else if (this->position.x < -0.32f){
+        position.x = -0.32f;
+    }
 
 	if(InputManager::keys['A'])
 	{
@@ -24,7 +30,8 @@ void SpaceShip::step()
 	{
         if (canShoot){
             Object* bullet=new Bullet("bullet.trg");
-            bullet->position.x=this->position.x;
+            bullet->position.x=this->position.x-0.02f;
+            bullet->position.z=this->position.z;
             bullet->position.y=this->position.y+0.15f;
             bullet->rotation.z=glm::radians(180.0f);
 

@@ -1,5 +1,6 @@
 #include "render.h"
 #include "background.h"
+#include "moveBackground.h"
 
 Render::Render() {
     glEnable(GL_BLEND);
@@ -93,14 +94,14 @@ void Render::drawObjectGL4(Object* obj, glm::vec3 camPos) {
     glUniform4fv(3, 1, &cameraPos[0]);
 
 
-    if (obj->typeObject == BACKGROUND_OBJ){
-        Background *backgroundOBJ= dynamic_cast<Background*>(obj);
-        glm::vec2 test = backgroundOBJ->scroll;
-        glUniform2fv(4,1,&test[0]);
+    if (obj->typeObject == MOVEBACKGROUND_OBJ){
+        MoveBackground *moveBackground= dynamic_cast<MoveBackground*>(obj);
+        glm::vec2 test = moveBackground->scroll;
+        glUniform2fv(5,1,&test[0]);
     } else{
         glm::vec2 test = glm::vec2 (0,0);
 
-        glUniform2fv(4,1,&test[0]);
+        glUniform2fv(5,1,&test[0]);
     }
 
     int textureUnit = 0;

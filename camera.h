@@ -12,6 +12,8 @@ private:
 	glm::vec3 lookAt;
 	glm::mat4 viewMatrix;
 	glm::mat4 projMatrix;
+    double degreesx;
+    double degreesy;
 	cameraType_e type;
 public:
 

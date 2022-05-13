@@ -16,3 +16,5 @@
 #define SPACESHIP_OBJ 	2
 #define CUBE_OBJ 		3
 #define BACKGROUND_OBJ  4
+#define HEALTH_OBJ 5
+#define MOVEBACKGROUND_OBJ 6
